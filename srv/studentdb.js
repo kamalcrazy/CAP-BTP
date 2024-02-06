@@ -49,17 +49,12 @@ module.exports = cds.service.impl(function () {
             req.error({'code': 'WRONGDOB',message:'Student not the right age for school:'+age, 'target':'dob'});
         }
 
-        let query1 = SELECT.from(Student).where({ref:["emailid"]}, "=", {val: req.data.emailid});
+        let query1 = SELECT.from(Student).where({ref:["email_id"]}, "=", {val: req.data.email_id});
         result = await cds.run(query1);
         if (result.length >0) {
             req.error({'code': 'STEMAILEXISTS',message:'Student with such email already exists'});
         }
 
-        let query2 = SELECT.from(Student).where({ref:["pan_no"]}, "=", {val: req.data.pan_no});
-        result = await cds.run(query2);
-        if (result.length >0) {
-            req.error({'code': 'STEMAILEXISTS',message:'Student with such pan number already exists'});
-        }
     });
         this.before(['CREATE','UPDATE'], Books, async(req) => {
         let query3 = SELECT.from(Books).where({ref:["code"]}, "=", {val: req.data.code});
