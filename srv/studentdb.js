@@ -28,6 +28,7 @@ module.exports = cds.service.impl(function () {
     const { Student, Gender, Books , Courses } = this.entities();
 
     this.on(['READ'], Student, async(req) => {
+        
         results = await cds.run(req.query);
         if(Array.isArray(results)){
             results.forEach(element => {
